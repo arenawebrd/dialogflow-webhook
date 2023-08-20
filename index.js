@@ -3,7 +3,7 @@ const app = express();
 const { WebhookClient } = require("dialogflow-fulfillment");
 
 app.get("/", function (req, res) {
-  res.send("Hello World");
+  res.send("Hola Mundo");
 });
 
 app.post("/webhook", express.json(), function (req, res) {
@@ -18,7 +18,7 @@ app.post("/webhook", express.json(), function (req, res) {
       // FUNCIÓN SALUDOS AVANZADA
     function welcome(agent) {
     if(data >=5 && data <=11)
-    agent.add('Hola 👩🏽‍🎤 Buen dia! ' +'\n'+'\n'+
+    agent.add('Hola 🤖 Buen dia! ' +'\n'+'\n'+
              'Bienvenido(a) soy *Ana Bot*, escoja una opcion de abajo!' +'\n'+'\n'+
              '[1] Quiero saber mas'+'\n'+
              '[2] Asistir a un Curso Gratis'+'\n'+
@@ -26,14 +26,14 @@ app.post("/webhook", express.json(), function (req, res) {
              '[4] Regalo Sorpresa');
     
     else if(data >=12 && data <=17)
-      agent.add('Hola 👩🏽‍🎤 Buenas tardes!' +'\n'+'\n'+
+      agent.add('Hola 🤖 Buenas tardes!' +'\n'+'\n'+
             'Bienvenido(a) soy *Ana Bot*, escoja una opcion de abajo!' +'\n'+'\n'+
             '[1] Quiero saber mas'+'\n'+
             '[2] Asistir a un Curso Gratis'+'\n'+
             '[3] Entrar al Grupo Vip'+'\n'+
             '[4] Regalo Sorpresa');
     else 
-      agent.add('Hola 👩🏽‍🎤 Buenas noche!' +'\n'+'\n'+
+      agent.add('Hola 🤖 Buenas noche!' +'\n'+'\n'+
             'Bienvenido(a) soy *Ana Bot*, escoja una opcion de abajo!' +'\n'+'\n'+
             '[1] Quiero saber mas'+'\n'+
             '[2] Asistir a un Curso Gratis'+'\n'+
@@ -42,8 +42,8 @@ app.post("/webhook", express.json(), function (req, res) {
   }  
 
   function fallback(agent) {
-    agent.add(`I didn't understand`);
-    agent.add(`I'm sorry, can you try again?`);
+    agent.add(`No entendí`);
+    agent.add(`Lo siento, ¿Puedes volver a intentarlo?`);
   }
   function ProbandoWebhook(agent) {
     for (let i = 1; i <= 5; i++) {
