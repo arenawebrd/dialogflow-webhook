@@ -52,20 +52,7 @@ app.post("/webhook", express.json(), function (req, res) {
       agent.add(`Esta es la respuesta: ` + i);
     }
   }
-
-  if(intentName == 'Consultar'){
- var Cedula = request.body.queryResult.parameters['Cedula'];
  
- return axios.get("https://api.steinhq.com/v1/storages/634366c5d27cdd09f0c3c8a6/Citas").then(res => {
- res.data.map(person => {
- if (person.Cedula === Cedula)
- response.json({"fulfillmentText" :"Detalles de la consulta "+Cedula+":"+"\n"+
- "Nombre: "+person.Nombre+"\n"+ 
- "Fecha: "+person.Fecha});
- });
- }); 
- }
-  
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
