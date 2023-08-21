@@ -17,7 +17,7 @@ app.post("/webhook", (req, res) => {
     agent.add("Lo siento, no puedo responder a eso en este momento.");
   }
 
- if(intentName == 'Consultar'){
+ if(intentMap == 'Consultar'){
  var Cedula = request.body.queryResult.parameters['Cedula'];
  
  return axios.get("https://api.steinhq.com/v1/storages/634366c5d27cdd09f0c3c8a6/Citas").then(res => {
