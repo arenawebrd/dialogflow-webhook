@@ -55,7 +55,7 @@ app.post("/webhook", express.json(), function (req, res) {
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
-  intentMap.set("Consultar", Consultar);
+  intentMap.set("Consultar", consultar);
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
   agent.handleRequest(intentMap);
