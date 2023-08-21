@@ -18,7 +18,7 @@ app.post("/webhook", (req, res) => {
   }
 
  if(intentName == 'Consultar'){
- var Consulta = request.body.queryResult.parameters['Cedula'];
+ var Cedula = request.body.queryResult.parameters['Cedula'];
  
  return axios.get("https://api.steinhq.com/v1/storages/634366c5d27cdd09f0c3c8a6/Citas").then(res => {
  res.data.map(person => {
