@@ -20,7 +20,7 @@ app.post("/webhook", (req, res) => {
  if(intentName == 'Consultar'){
  var Cedula = request.body.queryResult.parameters['Cedula'];
  
- return axios.get("https://api.steinhq.com/v1/storages/634366c5d27cdd09f0c3c8a6/Citas").then(res => {
+ return axios.get("https://api.steinhq.com/v1/storages/634366c5d27cdd09f0c3c8a6").then(res => {
  res.data.map(person => {
  if (person.Cedula === Cedula)
  response.json({"fulfillmentText" :"Detalles de la consulta "+Cedula+":"+"\n"+
@@ -29,9 +29,6 @@ app.post("/webhook", (req, res) => {
  });
  }); 
  }
-
-
-
   
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
