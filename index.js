@@ -33,12 +33,12 @@ app.post("/webhook", (req, res) => {
   }
 
   function insertData(agent) {
-    const nombre = agent.parameters.nombre;
-    const telefono = agent.parameters.telefono;
-    const cedula = agent.parameters.cedula;
+    const Nombre = agent.parameters.Nombre;
+    const Telefono = agent.parameters.Telefono;
+    const Cedula = agent.parameters.Cedula;
 
     const query =
-      "INSERT INTO Registro (nombre, telefono, cedula) VALUES (?, ?, ?)";
+      "INSERT INTO Registro (Nombre, Telefono, Cedula) VALUES (?, ?, ?)";
     connection.query(
       query,
       [nombre, telefono, cedula],
