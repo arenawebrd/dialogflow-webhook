@@ -17,6 +17,23 @@ app.post("/webhook", (req, res) => {
    }); 
    connection.connect(); 
 
+  if(intentName == 'RegistrarContacto'){ 
+   console.log('Agregar Contato') 
+  
+   var NombreContato = request.body.queryResult.parameters['Nombre']; 
+   var TelefonoContato = request.body.queryResult.parameters['Telefono']; 
+   var CedulaContato = request.body.queryResult.parameters['Cedula']; 
+   var query = 'insert into Registro values ("'+NombreContato+'","'+TelefonoContato+'","'+CedulaContato+'")'; 
+  
+ connection.query(query, function (error, results, fields) { 
+ if (error) throw error; 
+ connection.end(); 
+ response.json({"fulfillmentText" :"El contacto se ha registrado con exito!" }) 
+ });  
+}
+ 
+
+
 
   function welcome(agent) {
     agent.add("¡Hola! ¿En qué puedo ayudarte?");
