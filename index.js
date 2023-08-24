@@ -1,39 +1,28 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { WebhookClient } = require("dialogflow-fulfillment");
-const mysql = require('mysql');
+const mysql = require("mysql2");
 
 const app = express();
 app.use(bodyParser.json());
 
-app.post("/webhook", function(request, response) {
-  var connection = mysql.createConnection({ 
-   host: process.env.MYSQL_HOST, 
-   user: process.env.MYSQL_USER, 
-   password: process.env.MYSQL_PASS, 
-   database: process.env.MYSQL_DB 
-   }); 
-   connection.connect(); 
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "mysql",
+  password: "Titan120486",
+  database: "arenaweb",
+});
 
-  var intentName = request.body.queryResult.intent.displayName;
+connection.connect((error) => {
+  if (error) {
+    console.error("Error al conectar a la base de datos: ", error);
+  } else {
+    console.log("Conexión exitosa a la base de datos");
+  }
+});
 
-  if(intentName == 'RegistrarContacto'){ 
-   console.log('Agregar Contacto') 
-  
-   var NombreContacto = request.body.queryResult.parameters['Nombre']; 
-   var TelefonoContacto = request.body.queryResult.parameters['Telefono']; 
-   var CedulaContacto = request.body.queryResult.parameters['Cedula']; 
-   var query = 'insert into Registro values ("'+NombreContacto+'","'+TelefonoContacto+'","'+CedulaContacto+'")'; 
-  
- connection.query(query, function (error, results, fields) { 
- if (error) throw error; 
- connection.end(); 
- response.json({"fulfillmentText" :"El contacto se ha registrado con exito!" }) 
- });  
-}
- 
-
-
+app.post("/webhook", (req, res) => {
+  const agent = new WebhookClient({ request: req, response: res });
 
   function welcome(agent) {
     agent.add("¡Hola! ¿En qué puedo ayudarte?");
@@ -43,10 +32,34 @@ app.post("/webhook", function(request, response) {
     agent.add("Lo siento, no puedo responder a eso en este momento.");
   }
 
+  function RegistrarContacto(agent) {
+    const nombre = agent.parameters.nombre;
+    const telefono = agent.parameters.telefono;
+    const cedula = agent.parameters.cedula;
+
+    const query =
+      "INSERT INTO Registro (nombre, telefono, cedula) VALUES (?, ?, ?)";
+    connection.query(
+      query,
+      [nombre, telefono, cedula],
+      (error, results) => {
+        if (error) {
+          console.error("Error al insertar datos: ", error);
+          agent.add("Hubo un error al insertar los datos.");
+        } else {
+          console.log("Datos insertados correctamente");
+          agent.add(
+            "Los datos se han insertado correctamente en la base de datos."
+          );
+        }
+      }
+    );
+  }
+
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
-  intentMap.set("RegistrarContacto", RegistrarContacto);
+  intentMap.set("RegistrarContacto", registrar contacto);
 
   agent.handleRequest(intentMap);
 });
