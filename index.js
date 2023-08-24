@@ -32,7 +32,7 @@ function fallback(agent) {
   agent.add("Lo siento, no puedo responder a eso en este momento.");
 }
 
-function insertData(agent) {
+function Insert_Data(agent) {
   const nombre = agent.parameters.nombre;
   const telefono = agent.parameters.telefono;
   const cedula = agent.parameters.cedula;
@@ -59,7 +59,7 @@ function insertData(agent) {
 let intentMap = new Map();
 intentMap.set("Default Welcome Intent", welcome);
 intentMap.set("Default Fallback Intent", fallback);
-intentMap.set("Insert Data", insertData);
+intentMap.set("Insert_Data", insertData);
 
 agent.handleRequest(intentMap);
 
