@@ -32,7 +32,7 @@ app.post("/webhook", (req, res) => {
     agent.add("Lo siento, no puedo responder a eso en este momento.");
   }
 
-  function insert_Data(agent) {
+  function insertData(agent) {
     const nombre = agent.parameters.nombre;
     const telefono = agent.parameters.telefono;
     const cedula = agent.parameters.cedula;
@@ -59,7 +59,7 @@ app.post("/webhook", (req, res) => {
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
-  intentMap.set("Insert_Data", insert_Data);
+  intentMap.set("InsertData", insertData);
 
   agent.handleRequest(intentMap);
 });
