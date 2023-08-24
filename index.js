@@ -48,6 +48,7 @@ app.post("/webhook", funtion(request, response) {
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
+  intentMap.set("RegistrarContacto", RegistrarContacto);
 
   agent.handleRequest(intentMap);
 });
