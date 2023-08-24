@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const connection = mysql.createConnection({
-  host: "localhost",
+  host: "arenaweb_bot-dialogflow",
   user: "mysql",
   password: "Titan120486",
   database: "arenaweb",
