@@ -24,45 +24,45 @@ connection.connect((error) => {
 app.post("/webhook", (req, res) => {
   const agent = new WebhookClient({ request: req, response: res });
 
-function welcome(agent) {
-  agent.add("¡Hola! ¿En qué puedo ayudarte?");
-}
+  function welcome(agent) {
+    agent.add("¡Hola! ¿En qué puedo ayudarte?");
+  }
 
-function fallback(agent) {
-  agent.add("Lo siento, no puedo responder a eso en este momento.");
-}
+  function fallback(agent) {
+    agent.add("Lo siento, no puedo responder a eso en este momento.");
+  }
 
-function Insert_Data(agent) {
-  const nombre = agent.parameters.nombre;
-  const telefono = agent.parameters.telefono;
-  const cedula = agent.parameters.cedula;
+  function insert_Data(agent) {
+    const nombre = agent.parameters.nombre;
+    const telefono = agent.parameters.telefono;
+    const cedula = agent.parameters.cedula;
 
-  const query =
-    "INSERT INTO Registro (nombre, telefono, cedula) VALUES (?, ?, ?)";
-  connection.query(
-    query,
-    [nombre, telefono, cedula],
-    (error, results) => {
-      if (error) {
-        console.error("Error al insertar datos: ", error);
-        agent.add("Hubo un error al insertar los datos.");
-      } else {
-        console.log("Datos insertados correctamente");
-        agent.add(
-          "Los datos se han insertado correctamente en la base de datos."
-        );
+    const query =
+      "INSERT INTO Registro (nombre, telefono, cedula) VALUES (?, ?, ?)";
+    connection.query(
+      query,
+      [nombre, telefono, cedula],
+      (error, results) => {
+        if (error) {
+          console.error("Error al insertar datos: ", error);
+          agent.add("Hubo un error al insertar los datos.");
+        } else {
+          console.log("Datos insertados correctamente");
+          agent.add(
+            "Los datos se han insertado correctamente en la base de datos."
+          );
+        }
       }
-    }
-  );
-}
+    );
+  }
 
-let intentMap = new Map();
-intentMap.set("Default Welcome Intent", welcome);
-intentMap.set("Default Fallback Intent", fallback);
-intentMap.set("Insert_Data", insertData);
+  let intentMap = new Map();
+  intentMap.set("Default Welcome Intent", welcome);
+  intentMap.set("Default Fallback Intent", fallback);
+  intentMap.set("Insert_Data", insertData);
 
-agent.handleRequest(intentMap);
-
+  agent.handleRequest(intentMap);
+});
 
 app.listen(3300, () => {
   console.log("Servidor en ejecución en el puerto 3300");
