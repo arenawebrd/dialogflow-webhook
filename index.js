@@ -6,9 +6,7 @@ const mysql = require('mysql2');
 const app = express();
 app.use(bodyParser.json());
 
-app.post("/webhook", (req, res) => {
-  const agent = new WebhookClient({ request: req, response: res });
-
+app.post("/webhook", funtion(request, response) { 
   var connection = mysql.createConnection({ 
    host: process.env.MYSQL_HOST, 
    user: process.env.MYSQL_USER, 
@@ -16,6 +14,8 @@ app.post("/webhook", (req, res) => {
    database: process.env.MYSQL_DB 
    }); 
    connection.connect(); 
+
+  var intentName = request.queryResult.intent.displayName;
 
   if(intentName == 'RegistrarContacto'){ 
    console.log('Agregar Contacto') 
