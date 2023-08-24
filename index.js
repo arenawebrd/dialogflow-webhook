@@ -6,9 +6,7 @@ const mysql = require('mysql2');
 const app = express();
 app.use(bodyParser.json());
 
-app.post(‘/NOME WEBHOOK’, function(request, response) {
-
-app.post("/webhook", funtion(request, response) { 
+app.post("/webhook", function(request, response) {
   var connection = mysql.createConnection({ 
    host: process.env.MYSQL_HOST, 
    user: process.env.MYSQL_USER, 
