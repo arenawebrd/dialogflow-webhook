@@ -18,12 +18,12 @@ app.post("/webhook", (req, res) => {
    connection.connect(); 
 
   if(intentName == 'RegistrarContacto'){ 
-   console.log('Agregar Contato') 
+   console.log('Agregar Contacto') 
   
-   var NombreContato = request.body.queryResult.parameters['Nombre']; 
-   var TelefonoContato = request.body.queryResult.parameters['Telefono']; 
-   var CedulaContato = request.body.queryResult.parameters['Cedula']; 
-   var query = 'insert into Registro values ("'+NombreContato+'","'+TelefonoContato+'","'+CedulaContato+'")'; 
+   var NombreContacto = request.body.queryResult.parameters['Nombre']; 
+   var TelefonoContacto = request.body.queryResult.parameters['Telefono']; 
+   var CedulaContacto = request.body.queryResult.parameters['Cedula']; 
+   var query = 'insert into Registro values ("'+NombreContacto+'","'+TelefonoContacto+'","'+CedulaContacto+'")'; 
   
  connection.query(query, function (error, results, fields) { 
  if (error) throw error; 
