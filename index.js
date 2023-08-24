@@ -41,7 +41,7 @@ app.post("/webhook", (req, res) => {
       "INSERT INTO Registro (Nombre, Telefono, Cedula) VALUES (?, ?, ?)";
     connection.query(
       query,
-      [nombre, telefono, cedula],
+      [Nombre, Telefono, Cedula],
       (error, results) => {
         if (error) {
           console.error("Error al insertar datos: ", error);
