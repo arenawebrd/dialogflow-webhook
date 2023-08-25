@@ -81,15 +81,15 @@ app.post("/webhook", (req, res) => {
 
   function handleWriteIntoMysql(agent){
     const data = {
-      nombre: "agent.parameter.nombre",
-      telefono: "agent.parameter.telefono",
-      cedula: "agent.parameter.cedula"
+      first_name: "test",
+      last_name: "user",
+      email: "sample@email.com"
     };
     return connectToDatabase()
     .then(connection => {
       return insertIntoDatabase(connection, data)
       .then(result => {
- 		agent.add(`La informacin se ha agregado con exito`);       
+ 		agent.add(`La informacion se ha agregado con exito`);       
         connection.end();
       });
     });
