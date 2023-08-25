@@ -9,6 +9,14 @@ app.use(bodyParser.json());
 app.post("/webhook", (req, res) => {
   const agent = new WebhookClient({ request: req, response: res });
 
+var connection = mysql.createConnection({
+ host: process.env.MYSQL_HOST,
+ user: process.env.MYSQL_USER,
+ password: process.env.MYSQL_PASS,
+ database: process.env.MYSQL_DB
+ });
+ connection.connect();
+
   function welcome(agent) {
     agent.add("¡Hola! ¿En qué puedo ayudarte?");
   }
@@ -17,18 +25,6 @@ app.post("/webhook", (req, res) => {
     agent.add("Lo siento, no puedo responder a eso en este momento.");
   }
 
-  function connectToDatabase(){
-    const connection = mysql.createConnection({
-      host     : 'arenaweb_bot-dialogflow',
-      user     : 'mysql',
-      password : 'Titan120486',
-      database : 'arenaweb'
-    });
-    return new Promise((resolve,reject) => {
-       connection.connect();
-       resolve(connection);
-    });
-  }
   
 if(intentName == 'writeDataIntoMysql'){
  console.log('Agregar Contacto')
