@@ -36,7 +36,7 @@ if(intentName == 'writeDataIntoMysql'){
  var nombre = request.body.queryResult.parameters['nombre'];
  var telefono = request.body.queryResult.parameters['telefono'];
  var cedula = request.body.queryResult.parameters['cedula'];
- var query = 'insert into Registro values ("'+nombre+'","'+Telefono+'","'+cedula+'")';
+ var query = 'insert into Registro values ("'+nombre+'","'+telefono+'","'+cedula+'")';
  
  connection.query(query, function (error, results, fields) {
  if (error) throw error;
