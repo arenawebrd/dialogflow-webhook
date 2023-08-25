@@ -125,7 +125,7 @@ app.post("/webhook", (req, res) => {
 
 
   let intentMap = new Map();
-  intentMap.set("Default Welcome Intent", welcome);
+  intentMap.set("Welcome", welcome);
   intentMap.set("Default Fallback Intent", fallback);
   intentMap.set('getDataFromMySQL', handleReadFromMySQL);
   intentMap.set('writeDataIntoMysql', handleWriteIntoMysql);
