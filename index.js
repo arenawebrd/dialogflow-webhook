@@ -81,9 +81,9 @@ app.post("/webhook", (req, res) => {
 
   function handleWriteIntoMysql(agent){
     const data = {
-      first_name: "test",
-      last_name: "user",
-      email: "sample@email.com"
+     nombre: "Juan",
+     telefono: "8098909090",
+     cedula: "0990030908"
     };
     return connectToDatabase()
     .then(connection => {
