@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { WebhookClient } = require("dialogflow-fulfillment");
-const mysql = require("mysql");
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,12 +16,9 @@ app.post("/webhook", (req, res) => {
     agent.add("Lo siento, no puedo responder a eso en este momento.");
   }
 
-  
-
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
-  intentMap.set("InsertData", insertData);
 
   agent.handleRequest(intentMap);
 });
